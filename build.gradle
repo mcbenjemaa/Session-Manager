@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-
+group='com.github.medmedchiheb'
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.3"
@@ -31,5 +31,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.code.gson:gson:2.8.4'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    implementation 'com.github.jitpack:gradle-simple:1.0'
+
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
