@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
+/*
+created by Mohamed chiheb ben jemaa
 
+ 25-06-2018
+ */
 public class Session<T> {
 
     public static final String NOT_EXISTS="{}";
