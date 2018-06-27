@@ -30,15 +30,15 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.google.code.gson:gson:2.8.4'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    implementation 'com.github.jitpack:gradle-simple:1.0'
+    compile 'com.android.support:appcompat-v7:27.1.1'
+    compile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.8.4'
+    androidTestCompile 'com.android.support.test:runner:1.0.2'
+    compile 'com.github.jitpack:gradle-simple:1.0'
 
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 
@@ -46,4 +46,29 @@ uploadArchives {
     repositories {
         mavenLocal()
     }
+
+// build a jar with source files
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError  false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// build a jar with javadoc
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
 }
